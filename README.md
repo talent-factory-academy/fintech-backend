@@ -1,30 +1,16 @@
-# Node starter w/ Authentication (Express, TypeScript)
+# Angular Academy - Fintech (backend)
 
-> A starter template for demo or instructional purposes.
-> Contains some demo routes
+> Backend da utilizzare durante lo sviluppo dell'applicazione Angular "Fintech".
 
-## Features
+## Feature
 
-- TypeScript
-- Express
-- CORS
-- Authentication
-  - Registration
-  - Login
-  - CSRF Token
-
-## Main libraries
-
-- cors (for CORS)
-- csurf (for CSRF Protection)
-- express-session (for sessions)
-- session-file-store (for saving session information on disk)
-- passport, passport-local (for authentication)
-- NeDB (MongoDB alternative, saves on disk, no setup required)
+- Rotte specifiche per l'applicazione Fintech
+- Registrazione
+- Autenticazione (opzionale) via Cookie
 
 ## Get started
 
-Make sure to add a `.env` file at the root of the project, with these fields:
+Assicurati che sia presente un file `.env` nella root del progetto, con questi campi:
 
 ```
 PORT=...
@@ -32,26 +18,28 @@ APP_SECRET=...
 FRONTEND_URL=...
 ```
 
-- `PORT` specifies on which port should Node start
-- `APP_SECRET` is a random secret value, used for sessions
-- `FRONTEND_URL` is the URL of your frontend, needed for CORS (`Access-Control-Allow-Credentials`)
+- `PORT` specifica la porta di esecuzione del server (default `3000`)
+- `APP_SECRET` è un valore segreto, usato per la codifica delle sessioni
+- `FRONTEND_URL` è l'url del front-end (default `http://localhost:4200`) per CORS
 
-### If you don't need authentication
-Get started by running `npm run dev` (dev mode, hot reloading) or `npm start` (build).
+### Se non ti serve autenticazione
+Avvia il server con il comando `npm run dev`. Utilizza questo comando fino a che non avrai implementato un meccanismo di autenticazione sul front-end.
 
-### If you need authentication
-Get started by running `npm run dev:auth` (dev mode, hot reloading) or `npm run start:auth` (build).
+### Se ti serve autenticazione
+Avvia il server con il comando `npm run dev:auth`.
 
 
-## How to authenticate
+## Come autenticarsi
 
-0. Make sure to send requests with `withCredentials` set to `true`.
-1. As soon as the front-end starts, make a `GET` request for a _CSRF Token_ at `/csrf-token`.
-2. Grab the token from the `XSRF-TOKEN` Cookie.
-3. From now on, every state-changing request must include this token as a header named `X-XSRF-Token`.
-4. Register a new user at `/register`.
-5. Login at `/login`.
-6. Get the user's info at `/me`.
-7. Logout at `/logout`.
+Indicazioni generali:
 
-_Note: Most front-end frameworks handle points 2-3 automatically (eg. Angular)_
+0. Assicurati di inviare le richieste con `withCredentials` impostato a `true`.
+1. Inizialmente fai una richiesta `GET` per un _CSRF Token_ all'endpoint `/csrf-token`.
+2. Prendi il Cookie `XSRF-TOKEN`.
+3. Da ora in poi, ogni richiesta non-GET dovrà includere questo token nell'Header `X-XSRF-Token`.
+4. Registra un nuovo utente all'endpoint `/register`.
+5. Accedi dall'endpoint `/login`.
+6. Prendi le informazioni dell'utente dall'endpoint `/me`.
+7. Logout all'endpoint `/logout`.
+
+_Nota: Molti framework si occupano dei punti 2-3 in autonomia (es. Angular)_
