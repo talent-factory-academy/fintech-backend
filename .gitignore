@@ -117,6 +117,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# altro
-sessions
-stores
+# other
+sessions/
+stores/
