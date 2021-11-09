@@ -223,7 +223,7 @@ export function setupRoutes(app: Application, passport: PassportStatic) {
         error: 'L\'URL deve includere l\'id del contatto, esempio: /contact/g4159g5'
       })
     }  
-    contactStore.update({ _id }, { $set: req.body }, { multi: true }, (err, contact) => {
+    contactStore.update({ _id }, { $set: req.body }, { multi: false, returnUpdatedDocs: true }, (err, num, contact) => {
       res.json(contact);
     })
   });
